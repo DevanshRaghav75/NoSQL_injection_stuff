@@ -90,7 +90,7 @@ Since the $where operator is actually evaluated as JavaScript code, the attacker
 
 ## How to automate NoSQL injection ?
 
-There are very less tools and resources to learn `NoSQL injection` because its new to peoples, I know two tools that will automate the exploitation of `NoSQL injection` but note that these tools can give `false positive` so if these tools find any `NoSQL injection` issue so don't report it before you check that the `injection exists or not`.
+There are very less tools and resources `because its new to peoples, I know two tools that will automate the exploitation of `NoSQL injection` but note that these tools can give `false positive` so if these tools find any `NoSQL injection` issue so don't report it before you check that the `injection exists or not`.
 
 ## Tools :
 * NoSQLi - https://github.com/Charlie-belmer/nosqli
