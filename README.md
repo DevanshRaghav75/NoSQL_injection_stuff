@@ -30,7 +30,7 @@ A ```NoSQL injection``` vulnerability is an error in a ```web application``` tha
 
 ## Why to learn NoSQL injection ?
 
-Now most of the websites are using ```NoSQL database``` so its difficult to find ```SQL injection``` on websites so its time to upgrade to ```NoSQL injection```.
+Now most of the websites are using ```NoSQL database```,its difficult to find ```SQL injection``` on websites so its time to upgrade to ```NoSQL injection```.
 
 ## MongoDB Injection Example in a PHP Application
 
