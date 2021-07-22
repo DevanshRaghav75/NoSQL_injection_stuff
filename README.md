@@ -185,7 +185,7 @@ db.injection.insert({success:1});return 1;db.stores.mapReduce(function() { { emi
 I have created a python script to automate `XSS, SQLI, NOSQLI, LFI, SSRF` so lets see how you can automate NoSQL injection using <a href="https://github.com/DevanshRaghav75/Brahma">Brahma</a>.
 
 **How Brahma automates NoSQL injection ?**<br>
-After running `Brahma -d https://example.com -a nosqli` command the Brahma will find subdomains, waybackurls, SQL URLs and then will test every URL using nosqli tool and For loops.
+After running `Brahma -d https://example.com -a nosqli` command the Brahma will find subdomains, waybackurls, SQL URLs and then will test every URL using nosqli tool.
 
 **This is the code of Brahma that automates NoSQL injection**
 
