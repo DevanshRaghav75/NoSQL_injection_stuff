@@ -186,7 +186,7 @@ I have created a python script to automate `XSS, SQLI, NOSQLI, LFI, SSRF` so let
 **How Brahma automates NoSQL injection ?**<br>
 After running `Brahma -d https://example.com -a nosqli` command the Brahma will find subdomains, waybackurls, SQL URLs and then will test every URL using nosqli tool and For loops.
 
-**This is the code OF Brahma that automates NoSQL injection**
+**This is the code of Brahma that automates NoSQL injection**
 
 You can modify this code and can make a script for NoSQL injection automation, Hope this will you :)
 
