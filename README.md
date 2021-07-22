@@ -211,8 +211,10 @@ def nosqli():
     
     if re.search('https://', target):
         url = target.replace('https://', '')
+    elif re.search('http://', target): 
+    	url = target.replace('http://', '')
     else:
-        url = target.replace('http://', '')
+    	url = target
     
     os.system("subfinder -d " + url + " | tee results/domains.txt")
     print(BRIGHT + GREEN + "[*] " + RESET + "Finding working domains from results/domains.txt")
