@@ -11,6 +11,7 @@ Content:
 * <a href="https://github.com/DevanshRaghav75/NoSQL_injection_stuff/blob/main/README.md#how-to-automate-nosql-injection">How to automate NoSQL injection ?</a>
 * <a href="https://github.com/DevanshRaghav75/NoSQL_injection_stuff/blob/main/README.md#tools-">Tools to automate NoSQL injection</a>
 * <a href="https://github.com/DevanshRaghav75/NoSQL_injection_stuff/blob/main/README.md#payloads">NoSQL injection payloads</a>
+* <a href="https://github.com/DevanshRaghav75/NoSQL_injection_stuff/blob/main/README.md#nosqli-automation-using-my-tool">NoSQLi automation using my tool</a>
 * <a href="https://github.com/DevanshRaghav75/NoSQL_injection_stuff/blob/main/README.md#how-i-found-nosql-injection-on-dutch-goverment-website-and-got-a-t-shirt">How I found NoSQL injection on dutch goverment website</a>
 
 
